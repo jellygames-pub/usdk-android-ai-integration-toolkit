@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.3
+
+- Added a Chinese integrator FAQ covering the validated integration pitfalls found during the real sample-project trial
+- Linked the FAQ from the repository entry documents and toolkit manifest
+
 ## 0.2.2
 
 - Added a reusable Chinese GitHub Release draft for provider distribution

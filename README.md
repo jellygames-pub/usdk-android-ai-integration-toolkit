@@ -9,6 +9,7 @@ Chinese documentation:
 - [docs/USDK_PROVIDER_WORKFLOW.zh-CN.md](docs/USDK_PROVIDER_WORKFLOW.zh-CN.md)
 - [docs/GITHUB_RELEASE_v0.2.1.zh-CN.md](docs/GITHUB_RELEASE_v0.2.1.zh-CN.md)
 - [docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md](docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md)
+- [docs/INTEGRATOR_FAQ.zh-CN.md](docs/INTEGRATOR_FAQ.zh-CN.md)
 
 Current internal beta note:
 - Running the toolkit scripts currently requires Python 3.x on the operator machine.

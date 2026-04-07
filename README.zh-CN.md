@@ -32,6 +32,7 @@
 - Provider 发版检查表：[docs/PROVIDER_RELEASE_CHECKLIST.zh-CN.md](docs/PROVIDER_RELEASE_CHECKLIST.zh-CN.md)
 - GitHub Release 文案草稿：[docs/GITHUB_RELEASE_v0.2.1.zh-CN.md](docs/GITHUB_RELEASE_v0.2.1.zh-CN.md)
 - 接入方信息收集模板：[docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md](docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md)
+- 接入支持 FAQ：[docs/INTEGRATOR_FAQ.zh-CN.md](docs/INTEGRATOR_FAQ.zh-CN.md)
 - Skill 入口：[skill/usdk-android-integration/SKILL.md](skill/usdk-android-integration/SKILL.md)
 
 ## 核心命令

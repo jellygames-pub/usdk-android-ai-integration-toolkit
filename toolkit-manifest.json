@@ -1,6 +1,6 @@
 {
   "name": "usdk-android-ai-integration-toolkit",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "platform": "android",
   "sdk": "HeroUSDK",
   "status": "provider-internal-beta",
@@ -12,6 +12,7 @@
     "provider_release_checklist": "docs/PROVIDER_RELEASE_CHECKLIST.md",
     "github_release_cn": "docs/GITHUB_RELEASE_v0.2.1.zh-CN.md",
     "integrator_intake_template_cn": "docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md",
+    "integrator_faq_cn": "docs/INTEGRATOR_FAQ.zh-CN.md",
     "skill": "skill/usdk-android-integration/SKILL.md",
     "integration_spec": "spec/USDK_INTEGRATION_SPEC.yaml",
     "repair_playbook": "spec/USDK_REPAIR_PLAYBOOK.yaml",
