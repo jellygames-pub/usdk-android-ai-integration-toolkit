@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2
+
+- Added a reusable Chinese GitHub Release draft for provider distribution
+- Added a Chinese integrator intake template for collecting project, protocol, exit, role, and payment information before support begins
+- Linked the new delivery assets from the repository entry documents and manifest
+
 ## 0.2.1
 
 - Added Chinese delivery documentation for provider workflow, integrator quickstart, delivery readiness, AI compatibility, and release checklist

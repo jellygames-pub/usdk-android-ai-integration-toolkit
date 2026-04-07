@@ -30,6 +30,8 @@
 - 交付状态说明：[docs/DELIVERY_READINESS.zh-CN.md](docs/DELIVERY_READINESS.zh-CN.md)
 - AI 兼容性说明：[docs/AI_COMPATIBILITY.zh-CN.md](docs/AI_COMPATIBILITY.zh-CN.md)
 - Provider 发版检查表：[docs/PROVIDER_RELEASE_CHECKLIST.zh-CN.md](docs/PROVIDER_RELEASE_CHECKLIST.zh-CN.md)
+- GitHub Release 文案草稿：[docs/GITHUB_RELEASE_v0.2.1.zh-CN.md](docs/GITHUB_RELEASE_v0.2.1.zh-CN.md)
+- 接入方信息收集模板：[docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md](docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md)
 - Skill 入口：[skill/usdk-android-integration/SKILL.md](skill/usdk-android-integration/SKILL.md)
 
 ## 核心命令
