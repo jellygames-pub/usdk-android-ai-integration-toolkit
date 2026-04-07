@@ -6,6 +6,8 @@ Chinese documentation:
 - [README.zh-CN.md](README.zh-CN.md)
 - [docs/INTEGRATOR_QUICKSTART.zh-CN.md](docs/INTEGRATOR_QUICKSTART.zh-CN.md)
 - [docs/CODEX_INTEGRATOR_QUICKSTART.zh-CN.md](docs/CODEX_INTEGRATOR_QUICKSTART.zh-CN.md)
+- [docs/CURSOR_INTEGRATOR_QUICKSTART.zh-CN.md](docs/CURSOR_INTEGRATOR_QUICKSTART.zh-CN.md)
+- [docs/CLAUDE_CODE_INTEGRATOR_QUICKSTART.zh-CN.md](docs/CLAUDE_CODE_INTEGRATOR_QUICKSTART.zh-CN.md)
 - [docs/USDK_PROVIDER_WORKFLOW.zh-CN.md](docs/USDK_PROVIDER_WORKFLOW.zh-CN.md)
 - [docs/GITHUB_RELEASE_v0.2.1.zh-CN.md](docs/GITHUB_RELEASE_v0.2.1.zh-CN.md)
 - [docs/RELEASE_STEPS_v0.2.4.zh-CN.md](docs/RELEASE_STEPS_v0.2.4.zh-CN.md)
@@ -17,7 +19,7 @@ Chinese documentation:
 Current internal beta note:
 - Running the toolkit scripts currently requires Python 3.x on the operator machine.
 - This is acceptable for internal testing.
-- A no-Python distribution format is not part of `0.2.0`.
+- A no-Python distribution format is not part of `0.3.0`.
 
 ## What This Repository Contains
 
@@ -27,12 +29,16 @@ Current internal beta note:
 - A static doctor script for integration diagnosis
 - A repair runner that turns diagnosis into a phased repair plan
 - Reusable Java and Gradle template references
+- Portable Cursor adapter templates
+- Portable Claude Code adapter templates
 - Fixtures and example outputs for validation
 
 ## Start Here
 
 - Provider workflow: [docs/USDK_PROVIDER_WORKFLOW.md](docs/USDK_PROVIDER_WORKFLOW.md)
 - Integrator quickstart: [docs/INTEGRATOR_QUICKSTART.md](docs/INTEGRATOR_QUICKSTART.md)
+- Cursor quickstart: [docs/CURSOR_INTEGRATOR_QUICKSTART.md](docs/CURSOR_INTEGRATOR_QUICKSTART.md)
+- Claude Code quickstart: [docs/CLAUDE_CODE_INTEGRATOR_QUICKSTART.md](docs/CLAUDE_CODE_INTEGRATOR_QUICKSTART.md)
 - Delivery readiness: [docs/DELIVERY_READINESS.md](docs/DELIVERY_READINESS.md)
 - AI compatibility: [docs/AI_COMPATIBILITY.md](docs/AI_COMPATIBILITY.md)
 - Provider release checklist: [docs/PROVIDER_RELEASE_CHECKLIST.md](docs/PROVIDER_RELEASE_CHECKLIST.md)
@@ -70,7 +76,7 @@ This release is focused on static Android engineering integration:
 - High-confidence adapters:
   - Cline
   - GitHub Copilot CLI
-- Secondary adapters:
+- Packaged repository adapters:
   - Cursor
   - Claude Code
 

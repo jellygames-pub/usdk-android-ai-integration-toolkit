@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.0
+
+- Added root `AGENTS.md` and `CLAUDE.md` so Cursor-style and Claude-style agents have first-class repository guidance when working in the toolkit source repository
+- Added portable adapter templates for Cursor under `adapters/cursor/`
+- Added portable adapter templates for Claude Code under `adapters/claude/`
+- Added English and Chinese quickstarts for Cursor and Claude Code integrators
+- Updated the AI compatibility docs to distinguish packaged repository adapters from generic migration-only notes
+- Linked the new adapter assets and quickstarts from the repository entry documents
+
 ## 0.2.4
 
 - Added GitHub issue templates for integration support requests and toolkit bug reports

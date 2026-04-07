@@ -1,0 +1,43 @@
+---
+description: Use the vendored USDK Android AI Integration Toolkit to diagnose, plan, and apply USDK Android integration work in this project.
+alwaysApply: false
+---
+
+# USDK Android Integration Rule
+
+Assume this project vendors the toolkit at:
+
+`tools/usdk-android-ai-integration-toolkit`
+
+Before editing USDK integration code:
+
+1. Read:
+   - `tools/usdk-android-ai-integration-toolkit/spec/USDK_INTEGRATION_SPEC.yaml`
+   - `tools/usdk-android-ai-integration-toolkit/spec/USDK_REPAIR_PLAYBOOK.yaml`
+   - `tools/usdk-android-ai-integration-toolkit/skill/usdk-android-integration/references/action_template.md`
+   - `tools/usdk-android-ai-integration-toolkit/skill/usdk-android-integration/references/template_index.md`
+2. Run:
+
+```bash
+python tools/usdk-android-ai-integration-toolkit/scripts/usdk_doctor.py --project-root . --pretty
+```
+
+3. If the repair set is non-trivial, run:
+
+```bash
+python tools/usdk-android-ai-integration-toolkit/scripts/usdk_repair_runner.py --project-root . --format markdown
+```
+
+4. Use the doctor result and `prioritized_repairs` as the source of truth.
+5. Prefer additive edits and preserve existing game logic.
+6. Re-run the doctor after editing.
+
+Never guess:
+
+- protocol mode
+- exit-path logic
+- provider console values
+- backend callback values
+- real role and order field mappings
+
+Explicitly remind the integrator that `exit(activity)` must follow channel exit-dialog rules and the game's own exit flow.

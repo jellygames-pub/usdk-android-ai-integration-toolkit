@@ -1,6 +1,6 @@
 # AI 兼容性说明
 
-这份文档说明当前 USDK Android AI 接入工具包适合哪些 AI 工具，以及适配成本大致如何。
+这份文档说明当前 USDK Android AI 接入工具包适合哪些 AI 编码工具，以及适配成本大致如何。
 
 ## 支持层级
 
@@ -23,19 +23,21 @@
 
 这些工具与当前 toolkit 的结构最接近，迁移成本较低。
 
-### 次优先级适配环境
+### 已提供仓库级适配资产的环境
 
 - `Cursor`
 - `Claude Code`
 
-这些工具可以复用 Spec、模板和脚本，但不能直接原样消费当前的 `SKILL.md`，需要额外适配层。
+这两个工具不能原样消费当前的 `SKILL.md`，所以仓库现在已经内置了对应适配层：
 
-可选适配形式：
+- `Cursor`
+  - `AGENTS.md` 模板
+  - `.cursor/rules/*.mdc` 模板
+- `Claude Code`
+  - `CLAUDE.md` 模板
+  - `.claude/commands/*.md` 模板
 
-- rule 文件
-- agent 指令
-- slash command 包装
-- MCP 包装
+它们仍然需要先把这些适配文件放进目标工程，因为这类工具读取的是目标工程本地的项目级指令文件。
 
 ### 不推荐直接使用
 
@@ -75,9 +77,15 @@
   - Python 脚本可以保持不变
 
 - `Cursor`
-  - 将 Skill 改写成 Cursor rules 或 `AGENTS.md`
-  - Spec 与脚本仍可继续复用
+  - 直接使用 `adapters/cursor/` 下的适配模板
+  - 先把 toolkit 以目录方式放进目标工程，再把适配文件复制到目标工程根目录
+  - Spec 和脚本继续作为执行后端
 
 - `Claude Code`
-  - 将 Skill 改写成 slash commands、本地指令或子代理流程
-  - Spec 与脚本仍可继续复用
+  - 直接使用 `adapters/claude/` 下的适配模板
+  - 先把 toolkit 以目录方式放进目标工程，再把适配文件复制到目标工程根目录
+  - Spec 和脚本继续作为执行后端
+
+## 当前边界
+
+这份兼容性说明只针对当前 toolkit 版本。它表示仓库已经提供了对应适配资产，不表示所有 AI 工具都已经做到零配置开箱即用。

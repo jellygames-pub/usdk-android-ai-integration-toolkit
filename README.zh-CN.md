@@ -7,7 +7,7 @@
 
 ## 当前版本说明
 
-- 当前版本：`0.2.0`
+- 当前版本：`0.3.0`
 - 当前状态：提供方内部 Beta
 - 当前脚本运行依赖：`Python 3.x`
 - 当前不包含：免 Python 的公开交付形态
@@ -20,6 +20,8 @@
 - 静态诊断脚本 `usdk_doctor.py`
 - 分阶段修复计划生成脚本 `usdk_repair_runner.py`
 - Java / Gradle 模板参考
+- Cursor 适配模板
+- Claude Code 适配模板
 - Fixture 与示例输出
 
 ## 推荐阅读顺序
@@ -27,6 +29,8 @@
 - 提供方流程：[docs/USDK_PROVIDER_WORKFLOW.zh-CN.md](docs/USDK_PROVIDER_WORKFLOW.zh-CN.md)
 - 接入方快速开始：[docs/INTEGRATOR_QUICKSTART.zh-CN.md](docs/INTEGRATOR_QUICKSTART.zh-CN.md)
 - Codex 接入方快速说明：[docs/CODEX_INTEGRATOR_QUICKSTART.zh-CN.md](docs/CODEX_INTEGRATOR_QUICKSTART.zh-CN.md)
+- Cursor 接入方快速说明：[docs/CURSOR_INTEGRATOR_QUICKSTART.zh-CN.md](docs/CURSOR_INTEGRATOR_QUICKSTART.zh-CN.md)
+- Claude Code 接入方快速说明：[docs/CLAUDE_CODE_INTEGRATOR_QUICKSTART.zh-CN.md](docs/CLAUDE_CODE_INTEGRATOR_QUICKSTART.zh-CN.md)
 - 交付状态说明：[docs/DELIVERY_READINESS.zh-CN.md](docs/DELIVERY_READINESS.zh-CN.md)
 - AI 兼容性说明：[docs/AI_COMPATIBILITY.zh-CN.md](docs/AI_COMPATIBILITY.zh-CN.md)
 - Provider 发版检查表：[docs/PROVIDER_RELEASE_CHECKLIST.zh-CN.md](docs/PROVIDER_RELEASE_CHECKLIST.zh-CN.md)
@@ -38,6 +42,8 @@
   - `.github/ISSUE_TEMPLATE/integration-support-request.yml`
   - `.github/ISSUE_TEMPLATE/bug-report.yml`
 - Skill 入口：[skill/usdk-android-integration/SKILL.md](skill/usdk-android-integration/SKILL.md)
+- Cursor 适配模板目录：`adapters/cursor/`
+- Claude Code 适配模板目录：`adapters/claude/`
 
 ## 核心命令
 
@@ -71,7 +77,7 @@ python scripts/usdk_repair_runner.py --project-root <android_project_root> --for
 - 高优先级适配环境：
   - Cline
   - GitHub Copilot CLI
-- 次优先级适配环境：
+- 已提供仓库级适配资产的环境：
   - Cursor
   - Claude Code
 

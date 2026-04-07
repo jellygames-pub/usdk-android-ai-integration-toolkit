@@ -1,12 +1,16 @@
 {
   "name": "usdk-android-ai-integration-toolkit",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "platform": "android",
   "sdk": "HeroUSDK",
   "status": "provider-internal-beta",
   "entrypoints": {
     "provider_workflow": "docs/USDK_PROVIDER_WORKFLOW.md",
     "integrator_quickstart": "docs/INTEGRATOR_QUICKSTART.md",
+    "cursor_quickstart": "docs/CURSOR_INTEGRATOR_QUICKSTART.md",
+    "claude_code_quickstart": "docs/CLAUDE_CODE_INTEGRATOR_QUICKSTART.md",
+    "cursor_quickstart_cn": "docs/CURSOR_INTEGRATOR_QUICKSTART.zh-CN.md",
+    "claude_code_quickstart_cn": "docs/CLAUDE_CODE_INTEGRATOR_QUICKSTART.zh-CN.md",
     "delivery_readiness": "docs/DELIVERY_READINESS.md",
     "ai_compatibility": "docs/AI_COMPATIBILITY.md",
     "provider_release_checklist": "docs/PROVIDER_RELEASE_CHECKLIST.md",
@@ -14,6 +18,12 @@
     "release_steps_v024_cn": "docs/RELEASE_STEPS_v0.2.4.zh-CN.md",
     "integrator_intake_template_cn": "docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md",
     "integrator_faq_cn": "docs/INTEGRATOR_FAQ.zh-CN.md",
+    "root_agents": "AGENTS.md",
+    "root_claude_memory": "CLAUDE.md",
+    "cursor_adapter_agents": "adapters/cursor/AGENTS.md",
+    "cursor_adapter_rule": "adapters/cursor/.cursor/rules/usdk-android-integration.mdc",
+    "claude_adapter_memory": "adapters/claude/CLAUDE.md",
+    "claude_adapter_commands": "adapters/claude/.claude/commands/",
     "skill": "skill/usdk-android-integration/SKILL.md",
     "integration_spec": "spec/USDK_INTEGRATION_SPEC.yaml",
     "repair_playbook": "spec/USDK_REPAIR_PLAYBOOK.yaml",
@@ -27,7 +37,9 @@
     "template-guided-integration",
     "protocol-mode-guidance",
     "exit-logic-reminders",
-    "role-and-payment-field-scaffolding"
+    "role-and-payment-field-scaffolding",
+    "cursor-adapter-assets",
+    "claude-code-adapter-assets"
   ],
   "fixtures": [
     {

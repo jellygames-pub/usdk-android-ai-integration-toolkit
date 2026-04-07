@@ -20,17 +20,17 @@ This toolkit is authored in that model. The current `SKILL.md`, structured specs
 
 These tools are close to the current toolkit shape because they support local commands, file-aware workflows, and configurable agent behavior. They still require packaging or prompt adaptation, but the migration cost is relatively low.
 
-### Secondary Adapters
+### Packaged Repository Adapters
 
 - `Cursor`
 - `Claude Code`
 
-These tools can use the structured specs, templates, and scripts, but they do not natively consume the current `SKILL.md` format. They require a separate adapter layer such as:
+These tools do not natively consume the current `SKILL.md` format, so this repository now ships explicit adapter assets for them:
 
-- rule files
-- agent instructions
-- slash command wrappers
-- MCP wrapping
+- `AGENTS.md` and `.cursor/rules/*.mdc` templates for `Cursor`
+- `CLAUDE.md` and `.claude/commands/*.md` templates for `Claude Code`
+
+They still require a short installation step in the target Android project, because these tools read project-local instruction files.
 
 ### Not Recommended As-Is
 
@@ -72,11 +72,13 @@ Any target AI environment must support:
   - keep the Python scripts unchanged
 
 - `Cursor`:
-  - rewrite the skill into Cursor rules or `AGENTS.md`
+  - use the packaged adapter templates in `adapters/cursor/`
+  - vendor the toolkit into the target project and copy the adapter files into the target project root
   - preserve the spec and scripts as the execution backend
 
 - `Claude Code`:
-  - rewrite the skill into slash commands, local instructions, or subagent workflows
+  - use the packaged adapter templates in `adapters/claude/`
+  - vendor the toolkit into the target project and copy the adapter files into the target project root
   - preserve the spec and scripts as the execution backend
 
 ## Current Boundary
