@@ -2,6 +2,12 @@
 
 Provider-side toolkit for AI-guided USDK Android engineering integration.
 
+Chinese documentation:
+- [README.zh-CN.md](README.zh-CN.md)
+- [docs/INTEGRATOR_QUICKSTART.zh-CN.md](docs/INTEGRATOR_QUICKSTART.zh-CN.md)
+- [docs/CODEX_INTEGRATOR_QUICKSTART.zh-CN.md](docs/CODEX_INTEGRATOR_QUICKSTART.zh-CN.md)
+- [docs/USDK_PROVIDER_WORKFLOW.zh-CN.md](docs/USDK_PROVIDER_WORKFLOW.zh-CN.md)
+
 Current internal beta note:
 - Running the toolkit scripts currently requires Python 3.x on the operator machine.
 - This is acceptable for internal testing.

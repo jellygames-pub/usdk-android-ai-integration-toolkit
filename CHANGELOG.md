@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.1
+
+- Added Chinese delivery documentation for provider workflow, integrator quickstart, delivery readiness, AI compatibility, and release checklist
+- Added a Chinese Codex-specific quickstart for integrators using this toolkit with local projects
+- Updated the repository README to link the new Chinese documentation set
+
 ## 0.2.0
 
 - Expanded the runtime coverage to include explicit role-reporting hooks for `enterGame`, `createNewRole`, and `roleLevelUp`
