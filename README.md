@@ -8,6 +8,7 @@ Chinese documentation:
 - [docs/CODEX_INTEGRATOR_QUICKSTART.zh-CN.md](docs/CODEX_INTEGRATOR_QUICKSTART.zh-CN.md)
 - [docs/USDK_PROVIDER_WORKFLOW.zh-CN.md](docs/USDK_PROVIDER_WORKFLOW.zh-CN.md)
 - [docs/GITHUB_RELEASE_v0.2.1.zh-CN.md](docs/GITHUB_RELEASE_v0.2.1.zh-CN.md)
+- [docs/RELEASE_STEPS_v0.2.4.zh-CN.md](docs/RELEASE_STEPS_v0.2.4.zh-CN.md)
 - [docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md](docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md)
 - [docs/INTEGRATOR_FAQ.zh-CN.md](docs/INTEGRATOR_FAQ.zh-CN.md)
 - `.github/ISSUE_TEMPLATE/integration-support-request.yml`

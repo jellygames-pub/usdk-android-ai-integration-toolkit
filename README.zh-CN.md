@@ -31,6 +31,7 @@
 - AI 兼容性说明：[docs/AI_COMPATIBILITY.zh-CN.md](docs/AI_COMPATIBILITY.zh-CN.md)
 - Provider 发版检查表：[docs/PROVIDER_RELEASE_CHECKLIST.zh-CN.md](docs/PROVIDER_RELEASE_CHECKLIST.zh-CN.md)
 - GitHub Release 文案草稿：[docs/GITHUB_RELEASE_v0.2.1.zh-CN.md](docs/GITHUB_RELEASE_v0.2.1.zh-CN.md)
+- v0.2.4 发布步骤：[docs/RELEASE_STEPS_v0.2.4.zh-CN.md](docs/RELEASE_STEPS_v0.2.4.zh-CN.md)
 - 接入方信息收集模板：[docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md](docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md)
 - 接入支持 FAQ：[docs/INTEGRATOR_FAQ.zh-CN.md](docs/INTEGRATOR_FAQ.zh-CN.md)
 - GitHub Issue 模板：

@@ -5,6 +5,7 @@
 - Added GitHub issue templates for integration support requests and toolkit bug reports
 - Added issue-template contact links that direct integrators to the Chinese FAQ and intake template before filing
 - Linked the new issue templates from the repository entry documents
+- Added a reusable Chinese step-by-step release guide for creating the `v0.2.4` tag and GitHub release
 
 ## 0.2.3
 
