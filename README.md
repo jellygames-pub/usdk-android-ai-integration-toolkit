@@ -10,6 +10,8 @@ Chinese documentation:
 - [docs/GITHUB_RELEASE_v0.2.1.zh-CN.md](docs/GITHUB_RELEASE_v0.2.1.zh-CN.md)
 - [docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md](docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md)
 - [docs/INTEGRATOR_FAQ.zh-CN.md](docs/INTEGRATOR_FAQ.zh-CN.md)
+- `.github/ISSUE_TEMPLATE/integration-support-request.yml`
+- `.github/ISSUE_TEMPLATE/bug-report.yml`
 
 Current internal beta note:
 - Running the toolkit scripts currently requires Python 3.x on the operator machine.

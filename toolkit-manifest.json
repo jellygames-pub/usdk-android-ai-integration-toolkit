@@ -1,6 +1,6 @@
 {
   "name": "usdk-android-ai-integration-toolkit",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "platform": "android",
   "sdk": "HeroUSDK",
   "status": "provider-internal-beta",

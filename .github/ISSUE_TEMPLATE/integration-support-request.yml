@@ -1,0 +1,156 @@
+name: Integration Support Request
+description: Use this template when you need USDK Android integration support.
+title: "[Integration] "
+labels:
+  - integration-support
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please fill in the key project and integration details below.
+
+        If you are using the Chinese documentation set, you may also prepare your answers from:
+        - `docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md`
+        - `docs/INTEGRATOR_FAQ.zh-CN.md`
+
+  - type: input
+    id: project_name
+    attributes:
+      label: Project name
+      placeholder: ExampleGame
+    validations:
+      required: true
+
+  - type: input
+    id: package_name
+    attributes:
+      label: Package name
+      placeholder: com.example.game
+    validations:
+      required: true
+
+  - type: dropdown
+    id: project_type
+    attributes:
+      label: Project type
+      options:
+        - Native Android
+        - Unity exported Android project
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: gradle_version
+    attributes:
+      label: Gradle version
+      placeholder: 8.11.1
+
+  - type: dropdown
+    id: dependency_stack
+    attributes:
+      label: Dependency stack
+      options:
+        - AndroidX
+        - Legacy support
+        - Mixed or unclear
+    validations:
+      required: true
+
+  - type: input
+    id: application_class
+    attributes:
+      label: Application class
+      placeholder: com.example.game.GameApplication
+
+  - type: input
+    id: splash_activity
+    attributes:
+      label: Splash activity
+      placeholder: com.example.game.SplashActivity
+
+  - type: input
+    id: main_activity
+    attributes:
+      label: Main activity
+      placeholder: com.example.game.MainActivity
+
+  - type: dropdown
+    id: protocol_mode
+    attributes:
+      label: Protocol mode
+      options:
+        - USDK protocol popup
+        - Game-owned protocol popup
+    validations:
+      required: true
+
+  - type: textarea
+    id: exit_logic
+    attributes:
+      label: Exit logic
+      description: Describe whether the channel provides an exit dialog, whether the game needs a local exit dialog, and which actions should route through the shared exit path.
+      placeholder: |
+        Channel exit dialog: yes/no
+        Local exit dialog needed when channel does not provide one: yes/no
+        Shared exit path actions: exit button / back key / ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: role_reporting
+    attributes:
+      label: Role reporting mapping
+      description: Describe the real field mapping and trigger points for enterGame, createNewRole, and roleLevelUp.
+      placeholder: |
+        enterGame trigger:
+        createNewRole trigger:
+        roleLevelUp trigger:
+        RoleInfo field source notes:
+    validations:
+      required: true
+
+  - type: textarea
+    id: payment_mapping
+    attributes:
+      label: Payment mapping
+      description: Describe the real OrderInfo field mapping, callback handling, and payment flow entry point.
+      placeholder: |
+        Pay trigger:
+        callbackUrl source:
+        cpOrderId source:
+        goodsId/goodsName source:
+    validations:
+      required: true
+
+  - type: textarea
+    id: callbacks
+    attributes:
+      label: Callback handling
+      description: Describe the target behavior for login, switch account, kick/offline, logout, exit, and pay callbacks.
+      placeholder: |
+        login:
+        switch account:
+        kick/offline:
+        logout:
+        exit:
+        pay:
+
+  - type: textarea
+    id: doctor_output
+    attributes:
+      label: doctor output summary
+      description: Paste the current status, failed required checks, and prioritized repairs from usdk_doctor.py.
+      placeholder: |
+        summary.status:
+        required_failed_count:
+        prioritized_repairs:
+    validations:
+      required: true
+
+  - type: textarea
+    id: extra_context
+    attributes:
+      label: Additional context
+      description: Add any special project constraints, screenshots, or links here.
+

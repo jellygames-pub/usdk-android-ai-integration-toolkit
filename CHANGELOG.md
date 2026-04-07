@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.4
+
+- Added GitHub issue templates for integration support requests and toolkit bug reports
+- Added issue-template contact links that direct integrators to the Chinese FAQ and intake template before filing
+- Linked the new issue templates from the repository entry documents
+
 ## 0.2.3
 
 - Added a Chinese integrator FAQ covering the validated integration pitfalls found during the real sample-project trial

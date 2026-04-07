@@ -33,6 +33,9 @@
 - GitHub Release 文案草稿：[docs/GITHUB_RELEASE_v0.2.1.zh-CN.md](docs/GITHUB_RELEASE_v0.2.1.zh-CN.md)
 - 接入方信息收集模板：[docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md](docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md)
 - 接入支持 FAQ：[docs/INTEGRATOR_FAQ.zh-CN.md](docs/INTEGRATOR_FAQ.zh-CN.md)
+- GitHub Issue 模板：
+  - `.github/ISSUE_TEMPLATE/integration-support-request.yml`
+  - `.github/ISSUE_TEMPLATE/bug-report.yml`
 - Skill 入口：[skill/usdk-android-integration/SKILL.md](skill/usdk-android-integration/SKILL.md)
 
 ## 核心命令

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Chinese Integrator FAQ
+    url: https://github.com/jellygames-pub/usdk-android-ai-integration-toolkit/blob/main/docs/INTEGRATOR_FAQ.zh-CN.md
+    about: Review the validated Chinese integration FAQ before opening a new issue.
+  - name: Chinese Integrator Intake Template
+    url: https://github.com/jellygames-pub/usdk-android-ai-integration-toolkit/blob/main/docs/INTEGRATOR_INTAKE_TEMPLATE.zh-CN.md
+    about: Use the Chinese intake template to prepare integration details before asking for support.

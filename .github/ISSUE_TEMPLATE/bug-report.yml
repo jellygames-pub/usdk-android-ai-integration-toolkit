@@ -1,0 +1,88 @@
+name: Bug Report
+description: Report a toolkit bug, mismatch, or broken integration guidance.
+title: "[Bug] "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template when the toolkit behavior appears incorrect, inconsistent, or broken.
+
+  - type: input
+    id: toolkit_version
+    attributes:
+      label: Toolkit version
+      placeholder: 0.2.3
+    validations:
+      required: true
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: Codex / Cline / local shell / Windows 11 / Python 3.11
+    validations:
+      required: true
+
+  - type: input
+    id: project_type
+    attributes:
+      label: Target project type
+      placeholder: Native Android / Unity exported Android project
+
+  - type: textarea
+    id: issue_summary
+    attributes:
+      label: What is wrong
+      placeholder: Describe the incorrect behavior clearly.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: What you expected
+      placeholder: Describe the expected behavior.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Run ...
+        2. Open ...
+        3. Observe ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: outputs
+    attributes:
+      label: Relevant output
+      description: Paste doctor output, repair runner output, error messages, or build logs here.
+      placeholder: |
+        doctor summary:
+        error output:
+        build output:
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected_files
+    attributes:
+      label: Affected files
+      description: List the files or docs that seem incorrect.
+      placeholder: |
+        scripts/usdk_doctor.py
+        spec/USDK_INTEGRATION_SPEC.yaml
+        docs/INTEGRATOR_QUICKSTART.zh-CN.md
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional notes
+      description: Add screenshots, links, or any useful context here.
+
