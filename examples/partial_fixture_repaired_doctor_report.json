@@ -1,0 +1,309 @@
+﻿{
+  "check_schema_version": "0.2.0",
+  "project_root": "C:\\Users\\Administrator\\Documents\\New project\\fixtures\\android-partial-integration",
+  "project_type": "android_native",
+  "detected_sdk_variant": "android",
+  "summary": {
+    "status": "blocked_on_manual_inputs",
+    "required_failed_count": 0,
+    "required_warning_count": 0,
+    "check_count": 33
+  },
+  "checks": [
+    {
+      "id": "android_project_detected",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected Android project shape: android_native."
+    },
+    {
+      "id": "android_manifest_found",
+      "level": "required",
+      "status": "passed",
+      "message": "AndroidManifest.xml detected.",
+      "evidence": "app\\src\\main\\AndroidManifest.xml"
+    },
+    {
+      "id": "app_gradle_found",
+      "level": "required",
+      "status": "passed",
+      "message": "App-level Gradle file detected.",
+      "evidence": "app\\build.gradle"
+    },
+    {
+      "id": "hero_aar_present",
+      "level": "required",
+      "status": "passed",
+      "message": "HeroUSDK.aar found.",
+      "evidence": "app\\libs\\HeroUSDK.aar"
+    },
+    {
+      "id": "herosdkcfg_present",
+      "level": "required",
+      "status": "passed",
+      "message": "herosdkcfg.xml found.",
+      "evidence": "app\\src\\main\\assets\\herosdkcfg.xml"
+    },
+    {
+      "id": "herosdkcfg_has_product_placeholders",
+      "level": "required",
+      "status": "passed",
+      "message": "herosdkcfg.xml contains product placeholders."
+    },
+    {
+      "id": "manifest_install_location_auto",
+      "level": "required",
+      "status": "passed",
+      "message": "Manifest installLocation is set to auto."
+    },
+    {
+      "id": "manifest_application_declared",
+      "level": "required",
+      "status": "passed",
+      "message": "Manifest contains an application node."
+    },
+    {
+      "id": "manifest_application_name_present",
+      "level": "required",
+      "status": "passed",
+      "message": "Manifest declares android:name on the application node.",
+      "evidence": ".SampleApplication"
+    },
+    {
+      "id": "gradle_flatdir_present",
+      "level": "required",
+      "status": "passed",
+      "message": "Gradle flatDir libs repository detected."
+    },
+    {
+      "id": "gradle_herousdk_dependency_present",
+      "level": "required",
+      "status": "passed",
+      "message": "Gradle mentions the HeroUSDK dependency."
+    },
+    {
+      "id": "gradle_sdk_variant_detected",
+      "level": "required",
+      "status": "passed",
+      "message": "Gradle indicates the legacy android/support USDK variant.",
+      "evidence": "android"
+    },
+    {
+      "id": "application_extends_sdkapplication",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected SdkApplication inheritance.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\SampleApplication.java"
+      ]
+    },
+    {
+      "id": "splash_extends_sdksplashactivity",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected SdkSplashActivity inheritance.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\SplashActivity.java"
+      ]
+    },
+    {
+      "id": "protocol_listener_present",
+      "level": "advisory",
+      "status": "passed",
+      "message": "Detected setProtocolListener.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\SplashActivity.java"
+      ]
+    },
+    {
+      "id": "agree_protocol_present",
+      "level": "advisory",
+      "status": "failed",
+      "message": "setAgreeProtocol was not detected.",
+      "remediation": {
+        "priority": 2,
+        "files": [
+          "Splash or launch activity",
+          "consent flow owner"
+        ],
+        "action": "If you use self-hosted consent UI, call setAgreeProtocol after the user accepts the protocol."
+      }
+    },
+    {
+      "id": "init_call_present",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk init.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\SplashActivity.java"
+      ]
+    },
+    {
+      "id": "login_call_present",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk login.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java"
+      ]
+    },
+    {
+      "id": "enter_game_call_present",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk enterGame.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java"
+      ]
+    },
+    {
+      "id": "pay_call_present",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk pay.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java"
+      ]
+    },
+    {
+      "id": "logout_call_present",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk logout.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java"
+      ]
+    },
+    {
+      "id": "exit_call_present",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk exit.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java"
+      ]
+    },
+    {
+      "id": "lifecycle_oncreate_forwarded",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk onCreate.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java",
+        "app\\src\\main\\java\\com\\example\\partialfixture\\SampleApplication.java"
+      ]
+    },
+    {
+      "id": "lifecycle_onnewintent_forwarded",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk onNewIntent.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java"
+      ]
+    },
+    {
+      "id": "lifecycle_onstart_forwarded",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk onStart.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java",
+        "app\\src\\main\\java\\com\\example\\partialfixture\\SplashActivity.java"
+      ]
+    },
+    {
+      "id": "lifecycle_onresume_forwarded",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk onResume.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java"
+      ]
+    },
+    {
+      "id": "lifecycle_onpause_forwarded",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk onPause.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java"
+      ]
+    },
+    {
+      "id": "lifecycle_onstop_forwarded",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk onStop.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java"
+      ]
+    },
+    {
+      "id": "lifecycle_onrestart_forwarded",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk onRestart.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java"
+      ]
+    },
+    {
+      "id": "lifecycle_ondestroy_forwarded",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk onDestroy.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java"
+      ]
+    },
+    {
+      "id": "lifecycle_onactivityresult_forwarded",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk onActivityResult.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java"
+      ]
+    },
+    {
+      "id": "lifecycle_onrequestpermissionsresult_forwarded",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected HeroSdk onRequestPermissionsResult.",
+      "evidence": [
+        "app\\src\\main\\java\\com\\example\\partialfixture\\MainActivity.java"
+      ]
+    },
+    {
+      "id": "runtime_protocol_gate_present",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected both init and a protocol consent gate marker."
+    }
+  ],
+  "prioritized_repairs": [
+    {
+      "check_id": "agree_protocol_present",
+      "status": "failed",
+      "priority": 2,
+      "action": "If you use self-hosted consent UI, call setAgreeProtocol after the user accepts the protocol.",
+      "files": [
+        "Splash or launch activity",
+        "consent flow owner"
+      ]
+    }
+  ],
+  "missing_manual_inputs": [
+    "product_id",
+    "product_key",
+    "sdk_variant",
+    "protocol_popup_mode",
+    "payment_callback_url",
+    "payment_callback_key"
+  ],
+  "suggested_next_steps": [
+    "Provide real provider-side values for product, payment, and protocol configuration.",
+    "Re-run usdk_doctor.py after each integration pass."
+  ]
+}

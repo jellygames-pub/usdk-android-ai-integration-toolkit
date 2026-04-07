@@ -1,0 +1,465 @@
+version: 0.1.0
+name: USDK Android Repair Playbook
+purpose: map doctor check ids to concrete integration actions for AI-guided repair
+
+execution_order:
+  - phase: project_shape
+    checks:
+      - android_project_detected
+      - android_manifest_found
+      - app_gradle_found
+  - phase: resources_and_variant
+    checks:
+      - hero_aar_present
+      - herosdkcfg_present
+      - herosdkcfg_has_product_placeholders
+      - gradle_flatdir_present
+      - gradle_herousdk_dependency_present
+      - gradle_sdk_variant_detected
+  - phase: app_entry
+    checks:
+      - manifest_application_name_present
+      - application_extends_sdkapplication
+      - splash_extends_sdksplashactivity
+  - phase: consent_and_runtime
+    checks:
+      - protocol_listener_present
+      - agree_protocol_present
+      - runtime_protocol_gate_present
+      - init_call_present
+      - login_call_present
+      - enter_game_call_present
+      - create_new_role_call_present
+      - role_level_up_call_present
+      - pay_call_present
+      - kick_listener_present
+      - logout_call_present
+      - exit_call_present
+  - phase: lifecycle
+    checks:
+      - lifecycle_oncreate_forwarded
+      - lifecycle_onnewintent_forwarded
+      - lifecycle_onstart_forwarded
+      - lifecycle_onresume_forwarded
+      - lifecycle_onpause_forwarded
+      - lifecycle_onstop_forwarded
+      - lifecycle_onrestart_forwarded
+      - lifecycle_ondestroy_forwarded
+      - lifecycle_onactivityresult_forwarded
+      - lifecycle_onrequestpermissionsresult_forwarded
+
+repairs:
+  android_project_detected:
+    strategy: stop_and_retarget
+    goal: run against the actual Android project root
+    edit_targets: []
+    prerequisites: []
+    actions:
+      - Confirm the target contains an app module, AndroidManifest.xml, and app-level Gradle file.
+      - Re-run the doctor from the corrected project root before editing anything.
+    stop_conditions:
+      - If the project is not an Android project, stop.
+
+  android_manifest_found:
+    strategy: stop_and_retarget
+    goal: locate the Android manifest
+    edit_targets:
+      - app/src/main/AndroidManifest.xml
+    prerequisites:
+      - android_project_detected
+    actions:
+      - Verify the project root is correct.
+      - If the manifest lives in a non-standard module, adapt future edits to that module instead of forcing a new one.
+
+  app_gradle_found:
+    strategy: stop_and_retarget
+    goal: locate the app module build file
+    edit_targets:
+      - app/build.gradle
+      - app/build.gradle.kts
+    prerequisites:
+      - android_project_detected
+    actions:
+      - Verify the project root is correct.
+      - If the app module uses a non-standard name, adapt later edits to that module.
+
+  hero_aar_present:
+    strategy: add_resource
+    goal: ensure the HeroUSDK binary is present
+    edit_targets:
+      - app/libs/HeroUSDK.aar
+    prerequisites:
+      - app_gradle_found
+    actions:
+      - Add the provider-shipped HeroUSDK.aar to the app libs path or the approved dependency location.
+      - Do not rename the artifact unless the provider packaging model requires it.
+
+  herosdkcfg_present:
+    strategy: add_resource
+    goal: ensure the USDK config file exists
+    edit_targets:
+      - app/src/main/assets/herosdkcfg.xml
+    prerequisites:
+      - android_manifest_found
+    actions:
+      - Create or copy herosdkcfg.xml into the app assets directory.
+      - Keep the file additive and avoid deleting unrelated assets.
+
+  herosdkcfg_has_product_placeholders:
+    strategy: update_config
+    goal: make required USDK config fields visible and machine-detectable
+    edit_targets:
+      - app/src/main/assets/herosdkcfg.xml
+    prerequisites:
+      - herosdkcfg_present
+    actions:
+      - Ensure `_hu_pid_` and `_hu_pk_` entries exist.
+      - If real values are unknown, keep placeholders and report the manual input gap.
+    snippet_hint: |
+      <resources>
+          <string name="_hu_pid_">PRODUCT_ID</string>
+          <string name="_hu_pk_">PRODUCT_KEY</string>
+      </resources>
+
+  gradle_flatdir_present:
+    strategy: update_gradle
+    goal: make local USDK artifacts resolvable
+    edit_targets:
+      - settings.gradle
+      - settings.gradle.kts
+      - app/build.gradle
+      - app/build.gradle.kts
+    prerequisites:
+      - app_gradle_found
+    actions:
+      - For Gradle 7+ projects using settings-managed repositories, add the local libs repository under `dependencyResolutionManagement.repositories`.
+      - For older projects, add the local libs repository under the app module configuration when using the binary-drop integration path.
+    snippet_hint: |
+      dependencyResolutionManagement {
+          repositories {
+              flatDir {
+                  dirs "${rootDir}/app/libs"
+              }
+          }
+      }
+
+  gradle_herousdk_dependency_present:
+    strategy: update_gradle
+    goal: wire the HeroUSDK dependency into the app module
+    edit_targets:
+      - app/build.gradle
+      - app/build.gradle.kts
+    prerequisites:
+      - hero_aar_present
+      - app_gradle_found
+    actions:
+      - Add the HeroUSDK AAR dependency in the dependencies block.
+      - Keep existing project dependencies intact.
+    snippet_hint: |
+      dependencies {
+          implementation(name: 'HeroUSDK', ext: 'aar')
+      }
+
+  gradle_sdk_variant_detected:
+    strategy: decide_variant_then_patch
+    goal: align the project with one approved USDK variant
+    edit_targets:
+      - app/build.gradle
+      - app/build.gradle.kts
+    prerequisites:
+      - gradle_herousdk_dependency_present
+    actions:
+      - Infer whether the project is AndroidX or legacy support.
+      - If mixed, stop and ask for confirmation unless the provider has a default migration rule.
+      - Add only the variant-specific support dependencies required by that path.
+    variant_notes:
+      android:
+        hints:
+          - Prefer the support-based USDK package only when the host project is legacy.
+          - Expect support-v4 and multidex jar usage.
+      androidx:
+        hints:
+          - Prefer androidx.legacy:legacy-support-v4 and androidx.multidex.
+
+  manifest_application_name_present:
+    strategy: update_manifest
+    goal: make the manifest point at the owning Application class
+    edit_targets:
+      - app/src/main/AndroidManifest.xml
+    prerequisites:
+      - android_manifest_found
+    actions:
+      - Add or update `android:name` on the application node.
+      - Point it at the existing or newly created USDK-aware Application class.
+
+  application_extends_sdkapplication:
+    strategy: update_app_entry
+    goal: attach USDK at the Application layer
+    edit_targets:
+      - Application class
+      - app/src/main/AndroidManifest.xml
+    prerequisites:
+      - manifest_application_name_present
+    actions:
+      - Reuse the existing Application class if one already exists.
+      - Make it extend `SdkApplication`.
+      - Preserve existing initialization logic by calling `super.onCreate()`.
+    snippet_hint: |
+      public class SampleApplication extends SdkApplication {
+          @Override
+          public void onCreate() {
+              super.onCreate();
+          }
+      }
+
+  splash_extends_sdksplashactivity:
+    strategy: update_launch_activity
+    goal: attach the official USDK splash flow
+    edit_targets:
+      - Splash or launch activity
+      - app/src/main/AndroidManifest.xml
+    prerequisites:
+      - android_manifest_found
+    actions:
+      - Identify the true launch or splash activity.
+      - If the project already has a splash screen, adapt it instead of creating a second launcher.
+      - Make that activity extend `SdkSplashActivity`.
+
+  protocol_listener_present:
+    strategy: choose_consent_path
+    goal: support SDK-hosted protocol consent when that mode is chosen
+    edit_targets:
+      - Splash or launch activity
+    prerequisites:
+      - splash_extends_sdksplashactivity
+    actions:
+      - Only add this if the provider or integrator chooses SDK-hosted consent UI.
+      - Register `setProtocolListener` before calling `init`.
+
+  agree_protocol_present:
+    strategy: choose_consent_path
+    goal: support self-hosted protocol consent when that mode is chosen
+    edit_targets:
+      - Splash or launch activity
+      - consent flow owner
+    prerequisites:
+      - splash_extends_sdksplashactivity
+    actions:
+      - Only add this if the project owns its own consent dialog.
+      - Call `setAgreeProtocol` after the user accepts the protocol.
+
+  runtime_protocol_gate_present:
+    strategy: enforce_order
+    goal: guarantee `init` is gated by consent
+    edit_targets:
+      - Splash or launch activity
+      - consent flow owner
+    prerequisites:
+      - splash_extends_sdksplashactivity
+    actions:
+      - Ensure `init` is not called before protocol acceptance.
+      - Accept either `setProtocolListener -> onAgree -> init` or self-hosted consent -> `setAgreeProtocol` -> `init`.
+
+  init_call_present:
+    strategy: update_runtime_chain
+    goal: add USDK initialization
+    edit_targets:
+      - Splash or launch activity
+      - integration wrapper
+    prerequisites:
+      - runtime_protocol_gate_present
+    actions:
+      - Add `HeroSdk.getInstance().init(activity, productId, productKey)`.
+      - Use placeholders when real values are not available yet and report them as manual inputs.
+
+  login_call_present:
+    strategy: update_runtime_chain
+    goal: add the login entry point
+    edit_targets:
+      - Login entry point
+      - main game activity
+    prerequisites:
+      - init_call_present
+    actions:
+      - Add `HeroSdk.getInstance().login(activity)` at the agreed login trigger.
+
+  enter_game_call_present:
+    strategy: update_runtime_chain
+    goal: upload role data after login
+    edit_targets:
+      - Role entry point
+      - main game activity
+    prerequisites:
+      - login_call_present
+    actions:
+      - Build a `RoleInfo` object using real game role data.
+      - Call `enterGame` only after login success and role selection are available.
+
+  create_new_role_call_present:
+    strategy: update_runtime_chain
+    goal: upload role-creation data at the real role creation event
+    edit_targets:
+      - Role creation flow owner
+      - main game activity
+    prerequisites:
+      - login_call_present
+    actions:
+      - Build a `RoleInfo` object using the newly created role data.
+      - Call `createNewRole` only when the player actually creates a role.
+
+  role_level_up_call_present:
+    strategy: update_runtime_chain
+    goal: upload role level-up data at the real level-up event
+    edit_targets:
+      - Role level-up flow owner
+      - main game activity
+    prerequisites:
+      - login_call_present
+    actions:
+      - Build a `RoleInfo` object using the updated role data.
+      - Call `roleLevelUp` only when the player actually levels up.
+
+  pay_call_present:
+    strategy: update_runtime_chain
+    goal: attach USDK payment to the real purchase flow
+    edit_targets:
+      - Purchase flow owner
+    prerequisites:
+      - enter_game_call_present
+    actions:
+      - Build `OrderInfo` and `RoleInfo`.
+      - Call `pay` from the real purchase path, not from app startup code.
+
+  kick_listener_present:
+    strategy: update_runtime_chain
+    goal: handle forced offline or anti-addiction kick events
+    edit_targets:
+      - Account or session owner
+      - main game activity
+    prerequisites:
+      - login_call_present
+    actions:
+      - Register `setKickListener` before calling runtime entry points that may trigger SDK callbacks.
+      - Route the kick callback into the game's real relogin, return-to-title, or forced-exit path.
+
+  logout_call_present:
+    strategy: update_runtime_chain
+    goal: support logout behavior
+    edit_targets:
+      - Account or session owner
+    prerequisites:
+      - login_call_present
+    actions:
+      - Add logout handling where the project returns the user to the correct login or account state.
+
+  exit_call_present:
+    strategy: update_runtime_chain
+    goal: support exit behavior
+    edit_targets:
+      - Exit flow owner
+    prerequisites:
+      - login_call_present
+    actions:
+      - Add `exit` in the real game exit path.
+      - Check `isChannelHasExitDialog()` before deciding whether the game should show its own exit confirmation dialog.
+      - Route both the game exit button and the back key through the same exit decision path.
+
+  lifecycle_oncreate_forwarded:
+    strategy: forward_lifecycle
+    goal: forward Activity lifecycle to HeroSdk
+    edit_targets:
+      - Main activity or integration wrapper
+    prerequisites:
+      - login_call_present
+    actions:
+      - Add the HeroSdk `onCreate` forward in the activity owner path.
+
+  lifecycle_onnewintent_forwarded:
+    strategy: forward_lifecycle
+    goal: forward Activity lifecycle to HeroSdk
+    edit_targets:
+      - Main activity or integration wrapper
+    prerequisites:
+      - login_call_present
+    actions:
+      - Add the HeroSdk `onNewIntent` forward.
+
+  lifecycle_onstart_forwarded:
+    strategy: forward_lifecycle
+    goal: forward Activity lifecycle to HeroSdk
+    edit_targets:
+      - Main activity or integration wrapper
+    prerequisites:
+      - login_call_present
+    actions:
+      - Add the HeroSdk `onStart` forward.
+
+  lifecycle_onresume_forwarded:
+    strategy: forward_lifecycle
+    goal: forward Activity lifecycle to HeroSdk
+    edit_targets:
+      - Main activity or integration wrapper
+    prerequisites:
+      - login_call_present
+    actions:
+      - Add the HeroSdk `onResume` forward.
+
+  lifecycle_onpause_forwarded:
+    strategy: forward_lifecycle
+    goal: forward Activity lifecycle to HeroSdk
+    edit_targets:
+      - Main activity or integration wrapper
+    prerequisites:
+      - login_call_present
+    actions:
+      - Add the HeroSdk `onPause` forward.
+
+  lifecycle_onstop_forwarded:
+    strategy: forward_lifecycle
+    goal: forward Activity lifecycle to HeroSdk
+    edit_targets:
+      - Main activity or integration wrapper
+    prerequisites:
+      - login_call_present
+    actions:
+      - Add the HeroSdk `onStop` forward.
+
+  lifecycle_onrestart_forwarded:
+    strategy: forward_lifecycle
+    goal: forward Activity lifecycle to HeroSdk
+    edit_targets:
+      - Main activity or integration wrapper
+    prerequisites:
+      - login_call_present
+    actions:
+      - Add the HeroSdk `onRestart` forward.
+
+  lifecycle_ondestroy_forwarded:
+    strategy: forward_lifecycle
+    goal: forward Activity lifecycle to HeroSdk
+    edit_targets:
+      - Main activity or integration wrapper
+    prerequisites:
+      - login_call_present
+    actions:
+      - Add the HeroSdk `onDestroy` forward.
+
+  lifecycle_onactivityresult_forwarded:
+    strategy: forward_lifecycle
+    goal: forward Activity lifecycle to HeroSdk
+    edit_targets:
+      - Main activity or integration wrapper
+    prerequisites:
+      - login_call_present
+    actions:
+      - Add the HeroSdk `onActivityResult` forward.
+
+  lifecycle_onrequestpermissionsresult_forwarded:
+    strategy: forward_lifecycle
+    goal: forward Activity lifecycle to HeroSdk
+    edit_targets:
+      - Main activity or integration wrapper
+    prerequisites:
+      - login_call_present
+    actions:
+      - Add the HeroSdk `onRequestPermissionsResult` forward.

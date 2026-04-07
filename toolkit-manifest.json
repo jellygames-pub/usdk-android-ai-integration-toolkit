@@ -1,0 +1,40 @@
+{
+  "name": "usdk-android-ai-integration-toolkit",
+  "version": "0.2.0",
+  "platform": "android",
+  "sdk": "HeroUSDK",
+  "status": "provider-internal-beta",
+  "entrypoints": {
+    "provider_workflow": "docs/USDK_PROVIDER_WORKFLOW.md",
+    "integrator_quickstart": "docs/INTEGRATOR_QUICKSTART.md",
+    "delivery_readiness": "docs/DELIVERY_READINESS.md",
+    "ai_compatibility": "docs/AI_COMPATIBILITY.md",
+    "provider_release_checklist": "docs/PROVIDER_RELEASE_CHECKLIST.md",
+    "skill": "skill/usdk-android-integration/SKILL.md",
+    "integration_spec": "spec/USDK_INTEGRATION_SPEC.yaml",
+    "repair_playbook": "spec/USDK_REPAIR_PLAYBOOK.yaml",
+    "doctor_script": "scripts/usdk_doctor.py",
+    "repair_runner": "scripts/usdk_repair_runner.py"
+  },
+  "capabilities": [
+    "android-project-diagnosis",
+    "static-usdk-integration-validation",
+    "phased-repair-plan-generation",
+    "template-guided-integration",
+    "protocol-mode-guidance",
+    "exit-logic-reminders",
+    "role-and-payment-field-scaffolding"
+  ],
+  "fixtures": [
+    {
+      "name": "android-native-minimal",
+      "path": "fixtures/android-native-minimal",
+      "expected_status": "integration_partially_detected"
+    },
+    {
+      "name": "android-partial-integration",
+      "path": "fixtures/android-partial-integration",
+      "expected_status": "integration_partially_detected"
+    }
+  ]
+}

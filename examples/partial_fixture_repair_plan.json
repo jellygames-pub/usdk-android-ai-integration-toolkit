@@ -1,0 +1,319 @@
+﻿{
+  "runner_schema_version": "0.1.0",
+  "project_root": "C:\\Users\\Administrator\\Documents\\New project\\fixtures\\android-partial-integration",
+  "project_type": "android_native",
+  "doctor_summary": {
+    "status": "integration_partially_detected",
+    "required_failed_count": 17,
+    "required_warning_count": 1,
+    "check_count": 33
+  },
+  "summary": "Use the phased repair plan to clear the remaining static integration issues.",
+  "phase_plan": [
+    {
+      "phase_id": "app_entry",
+      "title": "Application And Splash Entry",
+      "repairs": [
+        {
+          "check_id": "application_extends_sdkapplication",
+          "priority": 1,
+          "status": "failed",
+          "action": "Update the owning Application class to extend SdkApplication and wire that class through the manifest.",
+          "files": [
+            "Application class",
+            "app/src/main/AndroidManifest.xml"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/application_java.md"
+          ]
+        },
+        {
+          "check_id": "manifest_application_name_present",
+          "priority": 1,
+          "status": "warning",
+          "action": "Declare the owning Application class in AndroidManifest.xml so USDK can attach through the intended application entry point.",
+          "files": [
+            "app/src/main/AndroidManifest.xml"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/application_java.md"
+          ]
+        },
+        {
+          "check_id": "splash_extends_sdksplashactivity",
+          "priority": 1,
+          "status": "failed",
+          "action": "Attach USDK splash integration by making the launch splash activity extend SdkSplashActivity.",
+          "files": [
+            "Splash or launch activity"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/splash_activity_java.md"
+          ]
+        }
+      ],
+      "edit_scope": [
+        "Application class",
+        "app/src/main/AndroidManifest.xml",
+        "Splash or launch activity"
+      ],
+      "template_scope": [
+        "skill/usdk-android-integration/references/templates/application_java.md",
+        "skill/usdk-android-integration/references/templates/splash_activity_java.md"
+      ]
+    },
+    {
+      "phase_id": "consent_and_runtime",
+      "title": "Consent And Runtime Chain",
+      "repairs": [
+        {
+          "check_id": "enter_game_call_present",
+          "priority": 1,
+          "status": "failed",
+          "action": "Upload role data with enterGame after login succeeds and real role data is available.",
+          "files": [
+            "Role entry point",
+            "main game activity"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/runtime_chain_java.md"
+          ]
+        },
+        {
+          "check_id": "init_call_present",
+          "priority": 1,
+          "status": "failed",
+          "action": "Add the HeroSdk init call to the runtime chain after protocol consent.",
+          "files": [
+            "Splash or launch activity",
+            "integration wrapper"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/splash_activity_java.md"
+          ]
+        },
+        {
+          "check_id": "pay_call_present",
+          "priority": 1,
+          "status": "failed",
+          "action": "Add the HeroSdk pay call to the real purchase flow with OrderInfo and RoleInfo.",
+          "files": [
+            "Purchase flow owner"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/runtime_chain_java.md"
+          ]
+        },
+        {
+          "check_id": "runtime_protocol_gate_present",
+          "priority": 1,
+          "status": "failed",
+          "action": "Make init happen only after protocol consent, either through setProtocolListener or through setAgreeProtocol in your own consent flow.",
+          "files": [
+            "Splash or launch activity",
+            "consent flow owner"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/splash_activity_java.md"
+          ]
+        },
+        {
+          "check_id": "agree_protocol_present",
+          "priority": 2,
+          "status": "failed",
+          "action": "If you use self-hosted consent UI, call setAgreeProtocol after the user accepts the protocol.",
+          "files": [
+            "Splash or launch activity",
+            "consent flow owner"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/splash_activity_java.md"
+          ]
+        },
+        {
+          "check_id": "exit_call_present",
+          "priority": 2,
+          "status": "failed",
+          "action": "Wire the USDK exit call into the game exit path after checking whether the channel owns the exit dialog.",
+          "files": [
+            "Exit flow owner"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/runtime_chain_java.md"
+          ]
+        },
+        {
+          "check_id": "logout_call_present",
+          "priority": 2,
+          "status": "failed",
+          "action": "Wire logout handling so the game can return to the correct post-logout state.",
+          "files": [
+            "Account or session owner"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/runtime_chain_java.md"
+          ]
+        },
+        {
+          "check_id": "protocol_listener_present",
+          "priority": 2,
+          "status": "failed",
+          "action": "If you use SDK-hosted consent UI, set an IProtocolListener before calling init.",
+          "files": [
+            "Splash or launch activity"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/splash_activity_java.md"
+          ]
+        }
+      ],
+      "edit_scope": [
+        "Role entry point",
+        "main game activity",
+        "Splash or launch activity",
+        "integration wrapper",
+        "Purchase flow owner",
+        "consent flow owner",
+        "Exit flow owner",
+        "Account or session owner"
+      ],
+      "template_scope": [
+        "skill/usdk-android-integration/references/templates/runtime_chain_java.md",
+        "skill/usdk-android-integration/references/templates/splash_activity_java.md"
+      ]
+    },
+    {
+      "phase_id": "lifecycle",
+      "title": "Lifecycle Forwarding",
+      "repairs": [
+        {
+          "check_id": "lifecycle_onactivityresult_forwarded",
+          "priority": 2,
+          "status": "failed",
+          "action": "Forward Activity onActivityResult into HeroSdk.",
+          "files": [
+            "Main activity or integration wrapper"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/activity_lifecycle_forwarding_java.md"
+          ]
+        },
+        {
+          "check_id": "lifecycle_ondestroy_forwarded",
+          "priority": 2,
+          "status": "failed",
+          "action": "Forward Activity onDestroy into HeroSdk.",
+          "files": [
+            "Main activity or integration wrapper"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/activity_lifecycle_forwarding_java.md"
+          ]
+        },
+        {
+          "check_id": "lifecycle_onnewintent_forwarded",
+          "priority": 2,
+          "status": "failed",
+          "action": "Forward Activity onNewIntent into HeroSdk.",
+          "files": [
+            "Main activity or integration wrapper"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/activity_lifecycle_forwarding_java.md"
+          ]
+        },
+        {
+          "check_id": "lifecycle_onpause_forwarded",
+          "priority": 2,
+          "status": "failed",
+          "action": "Forward Activity onPause into HeroSdk.",
+          "files": [
+            "Main activity or integration wrapper"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/activity_lifecycle_forwarding_java.md"
+          ]
+        },
+        {
+          "check_id": "lifecycle_onrequestpermissionsresult_forwarded",
+          "priority": 2,
+          "status": "failed",
+          "action": "Forward Activity onRequestPermissionsResult into HeroSdk.",
+          "files": [
+            "Main activity or integration wrapper"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/activity_lifecycle_forwarding_java.md"
+          ]
+        },
+        {
+          "check_id": "lifecycle_onrestart_forwarded",
+          "priority": 2,
+          "status": "failed",
+          "action": "Forward Activity onRestart into HeroSdk.",
+          "files": [
+            "Main activity or integration wrapper"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/activity_lifecycle_forwarding_java.md"
+          ]
+        },
+        {
+          "check_id": "lifecycle_onresume_forwarded",
+          "priority": 2,
+          "status": "failed",
+          "action": "Forward Activity onResume into HeroSdk.",
+          "files": [
+            "Main activity or integration wrapper"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/activity_lifecycle_forwarding_java.md"
+          ]
+        },
+        {
+          "check_id": "lifecycle_onstart_forwarded",
+          "priority": 2,
+          "status": "failed",
+          "action": "Forward Activity onStart into HeroSdk.",
+          "files": [
+            "Main activity or integration wrapper"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/activity_lifecycle_forwarding_java.md"
+          ]
+        },
+        {
+          "check_id": "lifecycle_onstop_forwarded",
+          "priority": 2,
+          "status": "failed",
+          "action": "Forward Activity onStop into HeroSdk.",
+          "files": [
+            "Main activity or integration wrapper"
+          ],
+          "templates": [
+            "skill/usdk-android-integration/references/templates/activity_lifecycle_forwarding_java.md"
+          ]
+        }
+      ],
+      "edit_scope": [
+        "Main activity or integration wrapper"
+      ],
+      "template_scope": [
+        "skill/usdk-android-integration/references/templates/activity_lifecycle_forwarding_java.md"
+      ]
+    }
+  ],
+  "manual_inputs": [
+    "product_id",
+    "product_key",
+    "sdk_variant",
+    "protocol_popup_mode",
+    "payment_callback_url",
+    "payment_callback_key"
+  ],
+  "assumptions": [
+    "Use legacy support-oriented Gradle templates unless the target project is being migrated.",
+    "Choose one consent path before wiring init: SDK-hosted or self-hosted."
+  ],
+  "source_doctor_checks": 33
+}

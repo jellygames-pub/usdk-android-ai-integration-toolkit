@@ -1,0 +1,123 @@
+version: 0.1.0
+name: USDK Android Engineering Integration Spec
+owner: provider
+scope:
+  platform: android
+  sdk: HeroUSDK
+  primary_goal: enable AI-guided project integration with static validation
+
+project_types:
+  - id: android_native
+    description: Android Studio style project with AndroidManifest.xml and app module build.gradle
+  - id: android_export_shell
+    description: Engine-exported Android project that still exposes app module files
+
+required_manual_inputs:
+  - product_id
+  - product_key
+  - sdk_variant
+  - protocol_popup_mode
+  - payment_callback_url
+  - payment_callback_key
+
+protocol_mode_options:
+  - id: usdk_protocol_popup
+    label: USDK protocol popup
+    implementation: setProtocolListener
+  - id: game_owned_protocol_popup
+    label: Game-owned protocol popup
+    implementation: setAgreeProtocol
+
+integration_phases:
+  - id: phase_1_resources
+    goal: import sdk resources and config files
+    required_checks:
+      - hero_aar_present
+      - herosdkcfg_present
+      - herosdkcfg_has_product_placeholders
+  - id: phase_2_manifest_and_gradle
+    goal: wire manifest and gradle changes
+    required_checks:
+      - android_manifest_found
+      - app_gradle_found
+      - manifest_install_location_auto
+      - manifest_application_name_present
+      - gradle_flatdir_present
+      - gradle_herousdk_dependency_present
+      - gradle_sdk_variant_detected
+  - id: phase_3_runtime_hooks
+    goal: connect required runtime entry points
+    required_checks:
+      - application_extends_sdkapplication
+      - splash_extends_sdksplashactivity
+      - runtime_protocol_gate_present
+      - init_call_present
+      - login_call_present
+      - enter_game_call_present
+      - create_new_role_call_present
+      - role_level_up_call_present
+      - pay_call_present
+  - id: phase_4_lifecycle
+    goal: forward required activity lifecycle callbacks
+    required_checks:
+      - lifecycle_oncreate_forwarded
+      - lifecycle_onnewintent_forwarded
+      - lifecycle_onstart_forwarded
+      - lifecycle_onresume_forwarded
+      - lifecycle_onpause_forwarded
+      - lifecycle_onstop_forwarded
+      - lifecycle_onrestart_forwarded
+      - lifecycle_ondestroy_forwarded
+      - lifecycle_onactivityresult_forwarded
+      - lifecycle_onrequestpermissionsresult_forwarded
+
+required_runtime_chain:
+  - protocol_listener_or_manual_agree
+  - init
+  - login
+  - enter_game
+  - create_new_role
+  - role_level_up
+  - pay
+  - logout_or_exit
+
+decision_rules:
+  - id: protocol_mode_must_be_explicit
+    description: Do not guess the consent path. The integrator must explicitly choose either the USDK popup flow or the game-owned popup flow before runtime integration is finalized.
+  - id: exit_logic_must_be_emphasized
+    description: Always remind the integrator that exit integration depends on whether the channel provides its own exit dialog and whether the game needs a local confirmation dialog when the channel does not.
+
+file_targets:
+  manifests:
+    - AndroidManifest.xml
+  gradle_files:
+    - app/build.gradle
+    - app/build.gradle.kts
+  config_files:
+    - assets/herosdkcfg.xml
+  java_or_kotlin_files:
+    - Application class
+    - Splash activity
+    - Main game activity or integration wrapper
+
+validation_policy:
+  required_failure_blocks_completion: true
+  warning_blocks_completion: false
+  completion_states:
+    - ready_for_manual_inputs
+    - blocked_on_project_shape
+    - blocked_on_manual_inputs
+    - integration_partially_detected
+    - integration_verified_static
+
+report_contract:
+  top_level_fields:
+    - check_schema_version
+    - project_root
+    - project_type
+    - detected_sdk_variant
+    - summary
+    - checks
+    - prioritized_repairs
+    - missing_manual_inputs
+    - suggested_next_steps

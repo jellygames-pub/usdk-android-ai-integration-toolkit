@@ -1,0 +1,52 @@
+{
+  "check_schema_version": "0.2.0",
+  "project_root": "/path/to/android-project",
+  "project_type": "android_native",
+  "detected_sdk_variant": "androidx",
+  "summary": {
+    "status": "blocked_on_manual_inputs",
+    "required_failed_count": 0,
+    "required_warning_count": 0,
+    "check_count": 33
+  },
+  "checks": [
+    {
+      "id": "android_project_detected",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected Android project shape: android_native."
+    },
+    {
+      "id": "gradle_sdk_variant_detected",
+      "level": "required",
+      "status": "passed",
+      "message": "Gradle indicates the androidx USDK variant.",
+      "evidence": "androidx"
+    },
+    {
+      "id": "protocol_listener_present",
+      "level": "advisory",
+      "status": "passed",
+      "message": "Detected setProtocolListener."
+    },
+    {
+      "id": "runtime_protocol_gate_present",
+      "level": "required",
+      "status": "passed",
+      "message": "Detected both init and a protocol consent gate marker."
+    }
+  ],
+  "prioritized_repairs": [],
+  "missing_manual_inputs": [
+    "product_id",
+    "product_key",
+    "sdk_variant",
+    "protocol_popup_mode",
+    "payment_callback_url",
+    "payment_callback_key"
+  ],
+  "suggested_next_steps": [
+    "Provide real provider-side values for product, payment, and protocol configuration.",
+    "Re-run usdk_doctor.py after each integration pass."
+  ]
+}
